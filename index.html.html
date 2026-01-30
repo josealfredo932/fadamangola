@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comité Nacional Jogos Fadam-Angola</title>
+    <meta name="description" content="1º Jogos Nacionais de Fadam-Angola 2026 - Inscrições Abertas">
+   
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+   
+    <style>
+        /* Reset básico */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; color: #fff; background: #000; line-height: 1.6; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; }
+       
+        /* Container principal */
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+       
+        /* Header */
+        header {
+            background: rgba(0,0,0,0.7);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            transition: background 0.3s;
+        }
+        header.scrolled { background: rgba(0,0,0,0.95); }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        .logo-img {
+            height: 60px;
+            width: auto;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        nav ul li { margin-left: 30px; }
+        nav ul li a {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+            transition: color 0.3s;
+            padding: 10px;
+        }
+        nav ul li a:hover { color: #ff6b00; }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .hamburger .bar {
+            height: 3px;
+            width: 100%;
+            background: #fff;
+            border-radius: 3px;
+            transition: all 0.3s ease-in-out;
+        }
+        .hamburger.active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .hamburger.active .bar:nth-child(2) { opacity: 0; }
+        .hamburger.active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('imagem/campo.png') center/cover no-repeat;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 60px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .hero h1 span { color: #ff6b00; }
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn {
+            display: inline-block;
+            background: #ff6b00;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: background 0.3s;
+        }
+        .btn:hover { background: #e55a00; }
+       
+        /* Seções gerais */
+        section { padding: 100px 0; }
+        .section-title {
+            font-size: 48px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: #ff6b00;
+            display: block;
+            margin: 20px auto 0;
+        }
+
+        /* About Section */
+        .about { background: #111; }
+        .about .container { display: flex; align-items: center; flex-wrap: wrap; gap: 50px; }
+        .about-img { flex: 1; min-width: 300px; border-radius: 10px; overflow: hidden; }
+        .about-content { flex: 1; min-width: 300px; }
+        .about-content h2 { font-size: 48px; font-weight: 900; margin-bottom: 20px; }
+        .about-content h2 span { color: #ff6b00; }
+
+        /* Liderança Section */
+        .leadership { background: #000; }
+        .leader {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 80px;
+            flex-wrap: wrap;
+        }
+        .leader.reverse { flex-direction: row-reverse; }
+        .leader img {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .leader-content { flex: 1; min-width: 300px; }
+        .leader-content h3 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #ff6b00;
+        }
+        .leader-content h4 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Modalidades Section */
+        .courses {
+            background: #111;
+            text-align: center;
+        }
+        .courses h3 { font-size: 24px; margin-bottom: 60px; color: #ff6b00; }
+        .modalities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .modality img {
+            border-radius: 50%;
+            border: 5px solid #ff6b00;
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            margin: 0 auto;
+            transition: transform 0.3s;
+        }
+        .modality img:hover { transform: scale(1.05); }
+        .modality span {
+            display: block;
+            margin-top: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 18px;
+        }
+       
+        /* CTA Inscrições */
+        .cta {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://thumbs.dreamstime.com/z/boxing-arena-filled-fans-under-bright-lights-intense-match-vibrant-showcases-excitement-ongoing-packed-348861889.jpg') center/cover;
+            text-align: center;
+        }
+        .contacts { font-size: 28px; font-weight: 700; color: #ff6b00; margin-top: 20px; }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid #333;
+            font-size: 14px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 48px; }
+            .about .container, .leader { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(0,0,0,0.98);
+                padding: 30px 0;
+                text-align: center;
+            }
+            nav ul li { margin: 20px 0; }
+            nav ul.show { display: flex; }
+            .hero h1 { font-size: 36px; }
+            .hero p { font-size: 18px; }
+        }
+        @media (max-width: 576px) {
+            .hero h1 { font-size: 30px; }
+            .modalities-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-inner">
+            <a href="#inicio" class="logo">
+                <img src="imagem/COMITÉ NACIONAL DE JOGOS FADAM-ANGOLA.png" alt="Logo Comité Nacional Jogos Fadam-Angola" class="logo-img">
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#modalidades">Modalidades</a></li>
+                    <li><a href="#lideranca">Liderança</a></li>
+                    <li><a href="#inscricoes">Inscrições</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container hero-content">
+            <h1>1º Jogos Nacionais<br>de <span>Fadam-Angola 2026</span></h1>
+            <p>15 a 30 de Agosto • O maior evento de artes marciais do país</p>
+            <a href="#inscricoes" class="btn">Inscreva sua Academia</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="sobre">
+        <div class="container">
+            <img src="imagem/lutadore.png" alt="Atleta Fadam" class="about-img">
+            <div class="about-content">
+                <h2>Sobre Nós<br><span>O Comité Nacional</span></h2>
+                <p>O Comité Nacional Jogos Fadam-Angola é a organização responsável pela promoção e desenvolvimento das artes marciais em Angola, integrando desporto, educação, cultura e turismo.</p>
+                <p>Em 2026 realizamos os primeiros Jogos Nacionais, reunindo as melhores academias e atletas do país em um evento histórico.</p>
+                <a href="#lideranca" class="btn">Conheça a Liderança</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Liderança Section -->
+    <section class="leadership" id="lideranca">
+        <div class="container">
+            <h2 class="section-title">Liderança</h2>
+
+            <!-- Fundador Internacional -->
+            <div class="leader">
+                <img src="imagem/santenai.jpg" alt="Fundador Internacional FADAM">
+                <div class="leader-content">
+                    <h3>Fundador Internacional</h3>
+                    <h4>Reconhecimento</h4>
+                    <p>A organização dos Jogos FADAM nesta região sensível não foi por acaso: foi um ato de paz e unidade nacional, fiel ao espírito das artes marciais, cuja missão é unir as pessoas para além das divisões.</p>
+                    <p>Através do esporte, da cultura e da fraternidade, a FADAM conseguiu unir o povo camaronês num sentimento comum de orgulho e esperança.</p>
+                    <p>Esse sucesso histórico rendeu ao seu fundador o título de Cavaleiro da Ordem do Valor, concedido pelo Chefe de Estado dos Camarões, em reconhecimento à sua excepcional contribuição para a paz, a juventude e a influência cultural da nação.</p>
+                </div>
+            </div>
+
+            <!-- Presidente Angola -->
+            <div class="leader reverse">
+                <img src="imagem/alexandre.jpg" alt="Alexandre Gomes - Presidente FADAM Angola">
+                <div class="leader-content">
+                    <h3>Alexandre Gomes</h3>
+                    <h4>Presidente da FADAM ao Nível de Angola</h4>
+                    <p>A nomeação de Alexandre Gomes como Presidente da FADAM ao Nível de Angola representa um marco de grande relevância para o desenvolvimento das artes marciais e da juventude angolana.</p>
+                    <p>Com visão, liderança e profundo compromisso com os valores fundamentais da FADAM, Alexandre Gomes tem trabalhado incansavelmente para promover a paz, a disciplina e a unidade entre os povos, utilizando o esporte como ferramenta de inclusão social e formação humana.</p>
+                    <p>Sob a sua liderança, a FADAM em Angola tornou-se um espaço de fraternidade, intercâmbio cultural e esperança para a juventude, reforçando o papel das artes marciais como instrumento de educação, cidadania e coesão nacional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modalidades Section -->
+    <section class="courses" id="modalidades">
+        <div class="container">
+            <h2 class="section-title">Nossas Modalidades</h2>
+            <h3>Modalidades Confirmadas para 2026</h3>
+            <div class="modalities-grid">
+                <div class="modality">
+                    <img src="imagem/boxing.jpg" alt="Boxing">
+                    <span>Boxing</span>
+                </div>
+                <div class="modality">
+                    <img src="imagem/dominique.jpg" alt="Kung Fu">
+                    <span>Kung Fu</span>
+                </div>
+                <div class="modality">
+                    <img src="imagem/capoeira.jpg" alt="Capoeira">
+                    <span>Capoeira</span>
+                </div>
+                <div class="modality">
+                    <img src="imagem/Maria-Niagi.jpg" alt="Judo">
+                    <span>Judo</span>
+                </div>
+                <div class="modality">
+                    <img src="imagem/Ju Jistu.jpg" alt="Ju Jitsu">
+                    <span>Ju Jitsu</span>
+                </div>
+                <div class="modality">
+                    <img src="imagem/Karate-do.jpg" alt="Karate">
+                    <span>Karate</span>
+                </div>
+                <div class="modality">
+                    <img src="imagem/taekwondo.jpg" alt="Taekwondo">
+                    <span>Taekwondo</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Inscrições -->
+    <section class="cta" id="inscricoes">
+        <div class="container">
+            <h2>Inscrições Abertas</h2>
+            <p>Garanta a participação da sua academia no maior evento de artes marciais do país!</p>
+            <p>Cadastre seu clube exclusivamente em nossos terminais</p>
+            <div class="contacts">
+                940 431 447 | 923 089 439<br>
+                923 972 658 | 924 975 759
+            </div>
+            <a href="tel:+244940431447" class="btn" style="margin-top: 40px;">Ligue Agora</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2026 COMITÉ NACIONAL JOGOS FADAM-ANGOLA. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navUl = document.querySelector('nav ul');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navUl.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>
